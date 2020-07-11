@@ -49,7 +49,7 @@ Browser compatibility will be an issue since it is making use of the FileAPI whi
 
 Paste is only supported by WebKit based browsers.
 ## UPDATED
-# fixed copy paste function for modern firefox and chrome (thanks @thorin)
+# fixed copy paste function for modern firefox and chrome (thanks [@thorin](thorin))
 ## /UPDATED
 Drag and drop should be supported by all modern browsers, tested with Chrome, Firefox and IE.
 
