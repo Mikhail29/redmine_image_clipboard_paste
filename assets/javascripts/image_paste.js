@@ -1,7 +1,7 @@
 jQuery.event.props.push('clipboardData');
 
 function pasteImageName(e, name) {
-    var text = '!' + name + '! ';
+    var text = '![' + name + '](' + name + ')';
     var scrollPos = e.scrollTop;
     var method = ((e.selectionStart || e.selectionStart == '0') ? 1 : (document.selection ? 2 : false ) );
     if (method == 2) { 
@@ -121,7 +121,12 @@ function processClipboardItems(clipboardData, editElement, event) {
 
             /* Upload pasted image */
             var blob = clipboardData.items[file].getAsFile();
-            blob.name = name; /* Not very elegent, but we pretent the Blob is actually a File */
+            if (Object.defineProperty) {
+                Object.defineProperty(blob, 'name', { value: name });
+            } else {
+                blob.name = name;
+            }
+            blob = $.extend(blob, {name: name});
             uploadAndAttachFiles([blob], fileinput);
 
             /* Inset text into input */
@@ -145,7 +150,11 @@ function preparePasteEvents() {
                         var timestamp = Math.round(+new Date()/1000);
                         var name = 'screenshot_'+addFile.nextAttachmentId+'_'+timestamp+'_'+e.dataTransfer.files[file].name.replace(/[ !"#%&\'()*:<=>?\[\\\]|]/g, '_');
                         var blob = e.dataTransfer.files[file].slice();
-                        blob.name = name;
+                        if (Object.defineProperty) {
+                            Object.defineProperty(blob, 'name', { value: name });
+                        } else {
+                            blob.name = name;
+                        }
                         uploadAndAttachFiles([blob], $('input:file.file_selector'));
                         pasteImageName(this, name);
 
@@ -201,4 +210,3 @@ function preparePasteEvents() {
 $( document ).ready(function() {
     preparePasteEvents()
 });
-
