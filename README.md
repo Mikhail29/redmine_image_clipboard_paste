@@ -20,9 +20,11 @@ To install the plugin clone the repro from github and migrate the database:
 ```
 cd /path/to/redmine/
 git clone git://github.com/credativUK/redmine_image_clipboard_paste.git plugins/redmine_image_clipboard_paste
-rake db:migrate_plugins RAILS_ENV=production for 2.x 
-or 
-rake redmine:plugins:migrate RAILS_ENV=development for 4.x
+rake db:migrate_plugins RAILS_ENV=production 
+for 2.x 
+or this
+rake redmine:plugins:migrate RAILS_ENV=development 
+for 4.x
 ```
 
 To uninstall the plugin migrate the database back and remove the plugin:
@@ -31,7 +33,7 @@ To uninstall the plugin migrate the database back and remove the plugin:
 cd /path/to/redmine/
 rake db:migrate:plugin NAME=redmine_image_clipboard_paste VERSION=0 RAILS_ENV=production  
 for 2.x 
-or
+or this
 rake redmine:plugins:migrate NAME=redmine_image_clipboard_paste VERSION=0 RAILS_ENV=production
 for 4.x
 rm -rf plugins/redmine_image_clipboard_paste
@@ -46,9 +48,9 @@ The latest version of this plugin is modified and tested only with Redmine 4.0.x
 Browser compatibility will be an issue since it is making use of the FileAPI which is still a working draft at time of writing and each browser has it's own implementation of this.
 
 Paste is only supported by WebKit based browsers.
-UPDATED
-fixed copy paste function for modern firefox and chrome (thanks @thorin)
-/UPDATED
+## UPDATED
+# fixed copy paste function for modern firefox and chrome (thanks @thorin)
+## /UPDATED
 Drag and drop should be supported by all modern browsers, tested with Chrome, Firefox and IE.
 
 ## License
